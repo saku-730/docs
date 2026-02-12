@@ -1,3 +1,8 @@
+---
+created: '2026-02-13T04:15:03+09:00'
+updated: '2026-02-13T04:15:03+09:00'
+author: saku
+---
 # Usage: コンテンツ編集手順
 
 このサイトは `pages/` 配下の `.md` / `.mdx` を元に静的ページを生成します。日本語と英語の2言語を想定しています。
@@ -106,3 +111,4 @@ npx next export
 - `audience` は `beginner` / `expert` のように運用します。
 - 数式は `{}` が JSX として解釈されるため、`String.raw` で囲むか `\(` `\)` の形で記述してください。
 - `_app.mdx` が存在するため、スタイルは `pages/_app.mdx` から読み込まれます。
+- pre-commit フックで `created`/`updated`/`author` を自動更新しています。必要に応じて `npm run fm:update` でも更新できます。

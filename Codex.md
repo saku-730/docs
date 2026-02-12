@@ -4,8 +4,9 @@ tags:
   - 2025/10
   - Nextjs
 draft: false
-created: 2025-10-06
-updated: 2026-02-12
+created: 2025-10-06T00:00:00.000Z
+updated: '2026-02-13T04:15:03+09:00'
+author: saku
 ---
 ###### **目次**
 ```toc
@@ -198,3 +199,5 @@ maxLevel:5
 - 2026-02-12: 警告対応として `package.json` に `"type": "module"` を追加し、`pages/_app.tsx` を `pages/_app.mdx` に変更。
 - 2026-02-12: Nextra の git リポジトリ警告を解消するため `git init` を実行。
 - 2026-02-12: コンテンツ編集手順（md/mdx 作成、_meta 更新、プレビュー、ビルド手順）を `usage.md` に整理。
+- 2026-02-12: frontmatter 自動更新のため `scripts/update-frontmatter.mjs` と `.githooks/pre-commit` を追加。`git config core.hooksPath .githooks` を設定し、`package.json` に `fm:update` スクリプトと `gray-matter` を追加。
+- 2026-02-12: `npm run fm:update` の動作確認を実施。テスト mdx に `created`/`updated`/`author` が自動挿入・更新されることを確認し、外部パスを git add しないようスクリプトを調整。
