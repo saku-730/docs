@@ -1,0 +1,57 @@
+---
+title: Lotka-Volterra Model
+description: Beginner and expert notes on the predator-prey model.
+tags:
+  - biology
+  - modeling
+categories:
+  - ecology
+  - modeling
+audience: beginner
+created: 2026-02-12T09:40:00+09:00
+updated: 2026-02-12T09:40:00+09:00
+author: saku
+---
+
+import { Tabs } from 'nextra/components'
+import InteractiveGrowth from '../../../components/InteractiveGrowth'
+
+# Lotka-Volterra Model
+
+<Tabs items={['Beginner', 'Expert']} storageKey="lv-level" defaultIndex={0}>
+  <Tabs.Tab>
+    <div>
+      <p>
+        The classic predator-prey model uses <strong>two coupled differential equations</strong> to describe interactions.
+      </p>
+      <ul>
+        <li>Prey grows on its own, predators grow by consuming prey</li>
+        <li>Interactions lead to cyclic oscillations</li>
+        <li>Closed orbits appear in phase space</li>
+      </ul>
+    </div>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <div>
+      <p>Standard form:</p>
+      <p>{String.raw`\[
+        \frac{dx}{dt} = \alpha x - \beta xy, \quad
+        \frac{dy}{dt} = \delta xy - \gamma y
+        \]`}</p>
+      <ul>
+        <li><code>x</code> is prey, <code>y</code> is predator</li>
+        <li>Center-type periodic orbits in phase plane</li>
+        <li>Parameter estimation and stochastic variants are important</li>
+      </ul>
+    </div>
+  </Tabs.Tab>
+</Tabs>
+
+## Interactive Chart
+
+<InteractiveGrowth />
+
+## Notes
+
+- This page demonstrates the beginner/expert toggle UI.
+- The interactive chart is implemented as a client component in MDX.
