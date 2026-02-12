@@ -197,3 +197,4 @@ maxLevel:5
 - 2026-02-12: `npm run build` が型チェック/リント込みで成功。全 24 ページの静的生成完了を確認。
 - 2026-02-12: 警告対応として `package.json` に `"type": "module"` を追加し、`pages/_app.tsx` を `pages/_app.mdx` に変更。
 - 2026-02-12: Nextra の git リポジトリ警告を解消するため `git init` を実行。
+- 2026-02-12: コンテンツ編集手順（md/mdx 作成、_meta 更新、プレビュー、ビルド手順）を `usage.md` に整理。
