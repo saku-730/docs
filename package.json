@@ -6,7 +6,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "fm:update": "node scripts/update-frontmatter.mjs"
+    "fm:update": "node scripts/update-frontmatter.mjs",
+    "page:new": "node scripts/new-page.mjs"
   },
   "dependencies": {
     "next": "13.5.6",

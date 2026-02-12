@@ -5,7 +5,7 @@ tags:
   - Nextjs
 draft: false
 created: 2025-10-06T00:00:00.000Z
-updated: '2026-02-13T04:15:03+09:00'
+updated: '2026-02-13T04:43:30+09:00'
 author: saku
 ---
 ###### **目次**
@@ -77,9 +77,17 @@ maxLevel:5
 
 ### 5. コンテンツ仕様
 
-- **コンテンツ配置**
-  - `content/` 配下に言語別・トピック別で配置する。
-  - 例: `content/ja/...`, `content/en/...`
+- **配置方式（page.mdx方式）**
+  - App Router 配下で `page.mdx` を用いてページを構成する。
+  - 例:
+    - `app/ja/topic-a/page.mdx`
+    - `app/en/topic-a/page.mdx`
+
+- **ページ単位ディレクトリ**
+  - ページごとにディレクトリを作成し、本文と画像等を同居させる。
+  - 例:
+    - `app/ja/topic-a/page.mdx`
+    - `app/ja/topic-a/figure-1.png`
 
 - **frontmatter標準項目**
   - `title`
@@ -201,3 +209,7 @@ maxLevel:5
 - 2026-02-12: コンテンツ編集手順（md/mdx 作成、_meta 更新、プレビュー、ビルド手順）を `usage.md` に整理。
 - 2026-02-12: frontmatter 自動更新のため `scripts/update-frontmatter.mjs` と `.githooks/pre-commit` を追加。`git config core.hooksPath .githooks` を設定し、`package.json` に `fm:update` スクリプトと `gray-matter` を追加。
 - 2026-02-12: `npm run fm:update` の動作確認を実施。テスト mdx に `created`/`updated`/`author` が自動挿入・更新されることを確認し、外部パスを git add しないようスクリプトを調整。
+- 2026-02-13: `pages/ja/overview.mdx` に1行追加して commit を実行。pre-commit により `updated` が更新されることを確認。`git push` はネットワーク解決失敗で未実施。
+- 2026-02-13: コンテンツ構成を `app/{locale}/{topic}/page.mdx` 方式に移行。`pages/` 配下の MDX と `_meta.js` を `app/` 配下へ移動し、`app/layout.tsx` を新規作成。`usage.md` を新構成に更新。
+- 2026-02-13: フロントマターのみのテンプレートとして `templates/page.mdx` を追加。
+- 2026-02-13: テンプレートから `app/{lang}/{dir}/page.mdx` を生成する `scripts/new-page.mjs` と `npm run page:new` を追加。`usage.md` に手順を追記。
