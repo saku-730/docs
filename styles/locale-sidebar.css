@@ -1,3 +1,11 @@
+ [data-current-locale='ja'] aside ul.nextra-menu-desktop > li:has(a[href^='/en/']) {
+  display: none !important;
+}
+
+[data-current-locale='en'] aside ul.nextra-menu-desktop > li:has(a[href^='/ja/']) {
+  display: none !important;
+}
+
 @media (min-width: 768px) {
   nav .header-locale-switch {
     order: 1;
