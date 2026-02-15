@@ -5,7 +5,7 @@ tags:
   - Nextjs
 draft: false
 created: 2025-10-06T00:00:00.000Z
-updated: '2026-02-16T01:43:29+09:00'
+updated: '2026-02-16T01:46:11+09:00'
 author: saku
 ---
 ###### **目次**
@@ -230,3 +230,4 @@ maxLevel:5
 - 2026-02-15: 要望により左サイドバー設定を元に戻し。`pages/ja/_meta.js` と `pages/en/_meta.js` を標準項目（`overview` / `biology` を含む）へ復元し、追加していた `pages/{ja,en}/tags/_meta.js` と `pages/{ja,en}/categories/_meta.js` を削除。`styles/locale-sidebar.css` からサイドバー制御ルールを撤去して、ヘッダー配置調整（`nav .header-locale-switch` と `nav .nextra-search` の `order`）のみ残す。`npm run build` 成功を確認。
 - 2026-02-15: 要望により左サイドバーを「現在言語のみ表示」へ調整。`styles/locale-sidebar.css` に `ul.nextra-menu-desktop > li:has(a[href^='/en/'])` / `...'/ja/'...` の非表示ルールを再追加し、反対言語グループを非表示化。`npm run build` 成功を確認。
 - 2026-02-15: 左サイドバー先頭の言語見出し（ja/en）を非表示化。`styles/locale-sidebar.css` に、現在言語グループの見出しボタン（`li:has(a[href^='/ja/']) > button` / `li:has(a[href^='/en/']) > button`）を非表示にするルールを追加。`npm run build` 成功を確認。
+- 2026-02-15: 要望により左サイドバーの階層構造を再度無効化。`styles/locale-sidebar.css` に `button` 非表示、`button + div` の `height/overflow` 強制展開、ネスト `ul` のインデント・縦線（`::before`）無効化を追加し、現在言語のみをフラット表示に変更。`npm run build` 成功を確認。

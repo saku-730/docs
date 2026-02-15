@@ -11,6 +11,33 @@
   display: none !important;
 }
 
+[data-current-locale='ja'] aside ul.nextra-menu-desktop button,
+[data-current-locale='en'] aside ul.nextra-menu-desktop button {
+  display: none !important;
+}
+
+[data-current-locale='ja'] aside ul.nextra-menu-desktop button + div,
+[data-current-locale='en'] aside ul.nextra-menu-desktop button + div {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+[data-current-locale='ja'] aside ul.nextra-menu-desktop button + div > div,
+[data-current-locale='en'] aside ul.nextra-menu-desktop button + div > div {
+  opacity: 1 !important;
+}
+
+[data-current-locale='ja'] aside ul.nextra-menu-desktop ul,
+[data-current-locale='en'] aside ul.nextra-menu-desktop ul {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+[data-current-locale='ja'] aside ul.nextra-menu-desktop ul::before,
+[data-current-locale='en'] aside ul.nextra-menu-desktop ul::before {
+  display: none !important;
+}
+
 @media (min-width: 768px) {
   nav .header-locale-switch {
     order: 1;
