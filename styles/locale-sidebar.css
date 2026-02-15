@@ -11,6 +11,11 @@
   display: none !important;
 }
 
+[data-current-locale='ja'] aside ul.nextra-menu-desktop a:not([href='/ja/']):not([href='/ja/tags/']):not([href='/ja/categories/']),
+[data-current-locale='en'] aside ul.nextra-menu-desktop a:not([href='/en/']):not([href='/en/tags/']):not([href='/en/categories/']) {
+  display: none !important;
+}
+
 [data-current-locale='ja'] aside ul.nextra-menu-desktop button,
 [data-current-locale='en'] aside ul.nextra-menu-desktop button {
   display: none !important;
