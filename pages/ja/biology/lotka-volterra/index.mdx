@@ -1,0 +1,55 @@
+---
+title: ロトカ・ヴォルテラモデル
+description: 捕食-被食モデルの入門と専門向けの要点。
+tags:
+  - biology
+  - modeling
+categories:
+  - ecology
+  - modeling
+audience: beginner
+created: 2026-02-12T00:40:00.000Z
+updated: '2026-02-16T01:38:13+09:00'
+author: saku
+---
+
+import { Tabs } from 'nextra/components'
+import InteractiveGrowth from '../../../../components/InteractiveGrowth'
+
+# ロトカ・ヴォルテラモデル
+
+<Tabs items={['入門', '専門']} defaultIndex={0}>
+  <Tabs.Tab>
+    <div>
+      <div>捕食者と被食者の相互作用を <strong>2変数の微分方程式</strong> で表現する古典モデルです。</div>
+      <ul>
+        <li>被食者は増殖し、捕食者は被食者を捕食して増える</li>
+        <li>相互作用により周期的な振動が現れる</li>
+        <li>状態空間で閉軌道が現れる</li>
+      </ul>
+    </div>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <div>
+      <div>標準形:</div>
+      <pre><code>{String.raw`\[
+        \frac{dx}{dt} = \alpha x - \beta xy, \quad
+        \frac{dy}{dt} = \delta xy - \gamma y
+        \]`}</code></pre>
+      <ul>
+        <li><code>x</code> は被食者、<code>y</code> は捕食者</li>
+        <li>位相平面で中心型の周期軌道</li>
+        <li>パラメータ推定や確率論的拡張が重要</li>
+      </ul>
+    </div>
+  </Tabs.Tab>
+</Tabs>
+
+## インタラクティブグラフ
+
+<InteractiveGrowth />
+
+## メモ
+
+- このページは入門/専門の切り替え UI をデモしています。
+- インタラクティブグラフは MDX 内の React コンポーネントで実装しています。

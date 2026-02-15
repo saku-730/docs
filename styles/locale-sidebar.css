@@ -1,0 +1,9 @@
+@media (min-width: 768px) {
+  nav .header-locale-switch {
+    order: 1;
+  }
+
+  nav .nextra-search {
+    order: 2;
+  }
+}

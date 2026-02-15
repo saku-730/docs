@@ -1,0 +1,19 @@
+---
+created: '2026-02-16T01:38:13+09:00'
+updated: '2026-02-16T01:38:13+09:00'
+author: saku
+---
+import 'nextra-theme-docs/style.css'
+import { useRouter } from 'next/router'
+import '../styles/locale-sidebar.css'
+
+export default function App({ Component, pageProps }) {
+  const { asPath } = useRouter()
+  const locale = asPath.startsWith('/en') ? 'en' : 'ja'
+
+  return (
+    <div data-current-locale={locale}>
+      <Component {...pageProps} />
+    </div>
+  )
+}

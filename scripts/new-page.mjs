@@ -26,9 +26,9 @@ function prompt(question) {
   })
 }
 
-const dirName = await prompt('Directory name (e.g. biology/new-topic): ')
-if (!dirName) {
-  console.error('Directory name is required.')
+const routePath = await prompt('Route path (e.g. biology/new-topic or overview): ')
+if (!routePath) {
+  console.error('Route path is required.')
   process.exit(1)
 }
 
@@ -44,7 +44,13 @@ if (!fs.existsSync(TEMPLATE_PATH)) {
   process.exit(1)
 }
 
-const targetDir = path.resolve('app', lang, dirName)
+const normalized = routePath.replace(/^\/+|\/+$/g, '')
+if (!normalized) {
+  console.error('Route path must not be empty.')
+  process.exit(1)
+}
+
+const targetDir = path.resolve('pages', lang, normalized)
 fs.mkdirSync(targetDir, { recursive: true })
 
 const template = fs.readFileSync(TEMPLATE_PATH, 'utf8')
@@ -52,7 +58,7 @@ const created = formatIsoWithOffset(new Date())
 
 const content = template.replace(/^created:\s*$/m, `created: ${created}`)
 
-const targetPath = path.join(targetDir, 'page.mdx')
+const targetPath = path.join(targetDir, 'index.mdx')
 fs.writeFileSync(targetPath, content)
 
 console.log(`Created: ${path.relative(process.cwd(), targetPath)}`)

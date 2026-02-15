@@ -5,7 +5,7 @@ tags:
   - Nextjs
 draft: false
 created: 2025-10-06T00:00:00.000Z
-updated: '2026-02-13T04:43:30+09:00'
+updated: '2026-02-16T01:38:13+09:00'
 author: saku
 ---
 ###### **目次**
@@ -213,3 +213,18 @@ maxLevel:5
 - 2026-02-13: コンテンツ構成を `app/{locale}/{topic}/page.mdx` 方式に移行。`pages/` 配下の MDX と `_meta.js` を `app/` 配下へ移動し、`app/layout.tsx` を新規作成。`usage.md` を新構成に更新。
 - 2026-02-13: フロントマターのみのテンプレートとして `templates/page.mdx` を追加。
 - 2026-02-13: テンプレートから `app/{lang}/{dir}/page.mdx` を生成する `scripts/new-page.mjs` と `npm run page:new` を追加。`usage.md` に手順を追記。
+- 2026-02-13: `npm run dev` で `ERR_INVALID_ARG_TYPE`（Nextra が `pages` ディレクトリ解決に失敗）を確認。`pages/` 構成を復元し、`app/` は `app_router_bak/` に退避してルート競合を解消。`scripts/new-page.mjs` と `usage.md` を `pages` 基準へ修正し、`pages/*/biology/lotka-volterra.mdx` の `InteractiveGrowth` import 相対パスを修正。`npm run build` と `npm run dev`（20秒起動）でエラー解消を確認。
+- 2026-02-13: コンテンツ配置を「ページ単位ディレクトリ」に統一するため、`pages/{lang}/.../*.mdx` を `pages/{lang}/.../index.mdx` へ移行。`scripts/new-page.mjs` を `pages/{lang}/{path}/index.mdx` 生成に変更し、`usage.md` を同方針へ更新。`pages/*/biology/lotka-volterra/index.mdx` の import 相対パスを調整し、`npm run build` 成功を確認。
+- 2026-02-13: `lotka-volterra` ページで hydration mismatch（`Expected server HTML to contain a matching <p> in <p>`）を確認。`Tabs` の初期表示差異を避けるため `pages/ja/biology/lotka-volterra/index.mdx` と `pages/en/biology/lotka-volterra/index.mdx` から `storageKey` を削除し、`defaultIndex` のみ使用するよう変更。`npm run build` 成功を確認。
+- 2026-02-13: サイドバーで現在言語以外のメニューを表示しないように調整。`pages/_app.mdx` で `asPath` から `data-current-locale` を付与し、`styles/locale-sidebar.css` で `aside` 内の逆言語リンク（`/ja` or `/en`）を非表示化。`npm run build` 成功を確認。
+- 2026-02-13: 左サイドバーに `en`/`ja` の言語ルート見出しが残る問題に対応。`styles/locale-sidebar.css` に `ul.nextra-menu-desktop > li:has(a[href^='/en/'])` / `...'/ja/'` の非表示ルールを追加し、逆言語のルートグループ自体を非表示化。`npm run build` 成功を確認。
+- 2026-02-13: `lotka-volterra` ページの hydration mismatch（`Expected server HTML to contain a matching <p> in <p>`）再発に対応。`pages/ja/biology/lotka-volterra/index.mdx` と `pages/en/biology/lotka-volterra/index.mdx` の `Tabs.Tab` 内で `<p>` を `<div>` に置換し、式表示を `<pre><code>` へ変更して段落ネストの不整合を回避。`npm run build` 成功を確認。
+- 2026-02-15: ヘッダーロゴのリンク先を固定 `/` から現在言語トップ（`/ja` または `/en`）へ変更。`theme.config.tsx` の `logo` を `useRouter().asPath` 判定のリンクコンポーネントへ差し替え。
+- 2026-02-15: 言語切り替えUIをサイドバー下からヘッダー（検索ボックス左）へ移動。`theme.config.tsx` にヘッダー用 `HeaderLocaleSwitch` を追加し、`navbar.extraContent` で配置、既定のサイドバー言語スイッチを出さないため `i18n` を空配列化。`npm run build` 成功を確認。
+- 2026-02-15: 運用ドキュメント更新ルールとして、仕様・運用変更時は `Codex.md` と `usage.md` へ追記する方針を `usage.md` に明記。
+- 2026-02-15: 言語切り替えUIの位置を再調整。ヘッダー右側で検索ボックスの左に固定するため、`theme.config.tsx` の `HeaderLocaleSwitch` から `order` インライン指定を除去し、`styles/locale-sidebar.css` に `nav .header-locale-switch { order: 1; }` / `nav .nextra-search { order: 2; }`（`md` 以上）を追加。`npm run build` 成功を確認。
+- 2026-02-15: 左サイドバーの表示項目を簡素化。`pages/ja/_meta.js` と `pages/en/_meta.js` を更新し、上位項目を `ホーム(Home) / タグ一覧(Tags) / カテゴリ一覧(Categories)` のみに制限、`overview` と `biology` は `display: 'hidden'` 化。`pages/{ja,en}/tags/_meta.js` と `pages/{ja,en}/categories/_meta.js` を追加し、詳細ページ項目（`biology`/`modeling`/`ecology`）を非表示化。さらに `styles/locale-sidebar.css` で `a[href='/ja']` / `a[href='/en']` を非表示化して言語ラベル表示を抑制。`npm run build` 成功を確認。
+- 2026-02-15: 左サイドバー最上部の言語欄が残るケースに対応。`styles/locale-sidebar.css` を更新し、`/ja/`・`/en/`（末尾スラッシュ付き）とその親 `li` も非表示対象へ追加。`npm run build` 成功を確認。
+- 2026-02-15: 左サイドバーの先頭 `ja/en` 見出しがリンクではなくボタン要素だったため、`styles/locale-sidebar.css` に `ul.nextra-menu-desktop > li:has(a[href^='/ja/']) > button` / `...'/en/'...` の非表示ルールを追加して見出し自体を非表示化。`npm run build` 成功を確認。
+- 2026-02-15: 左サイドバーの階層構造を無効化。`styles/locale-sidebar.css` でサイドバー内の `button` を非表示にし、`/ja/`・`/ja/tags/`・`/ja/categories/`（英語側は `/en/...`）以外のリンクを非表示化。あわせてネスト用のインデント/縦線（`ul` の margin/padding と `::before`）を無効化してフラット表示に変更。`npm run build` 成功を確認。
+- 2026-02-15: 要望により左サイドバー設定を元に戻し。`pages/ja/_meta.js` と `pages/en/_meta.js` を標準項目（`overview` / `biology` を含む）へ復元し、追加していた `pages/{ja,en}/tags/_meta.js` と `pages/{ja,en}/categories/_meta.js` を削除。`styles/locale-sidebar.css` からサイドバー制御ルールを撤去して、ヘッダー配置調整（`nav .header-locale-switch` と `nav .nextra-search` の `order`）のみ残す。`npm run build` 成功を確認。
