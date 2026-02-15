@@ -5,7 +5,7 @@ tags:
   - Nextjs
 draft: false
 created: 2025-10-06T00:00:00.000Z
-updated: '2026-02-16T01:52:19+09:00'
+updated: '2026-02-16T02:23:19+09:00'
 author: saku
 ---
 ###### **目次**
@@ -232,3 +232,7 @@ maxLevel:5
 - 2026-02-15: 左サイドバー先頭の言語見出し（ja/en）を非表示化。`styles/locale-sidebar.css` に、現在言語グループの見出しボタン（`li:has(a[href^='/ja/']) > button` / `li:has(a[href^='/en/']) > button`）を非表示にするルールを追加。`npm run build` 成功を確認。
 - 2026-02-15: 要望により左サイドバーの階層構造を再度無効化。`styles/locale-sidebar.css` に `button` 非表示、`button + div` の `height/overflow` 強制展開、ネスト `ul` のインデント・縦線（`::before`）無効化を追加し、現在言語のみをフラット表示に変更。`npm run build` 成功を確認。
 - 2026-02-15: 要望により左サイドバー表示リンクを3件に限定。`styles/locale-sidebar.css` に許可リンクのみ残すルール（`/ja/`・`/ja/tags/`・`/ja/categories/`、英語側は `/en/`・`/en/tags/`・`/en/categories/`）を追加し、他リンクを非表示化。`npm run build` 成功を確認。
+- 2026-02-15: 左サイドバーの不要ブロックを透明化ではなく完全にレイアウト除去。`styles/locale-sidebar.css` に `li/div/ul:has(a[href^='/ja/biology/'])`（英語側同等）へ `display:none` と `height/min-height/margin/padding:0`、`overflow:hidden` を追加し、サイズ占有をゼロ化。`npm run build` 成功を確認。
+- 2026-02-15: 副作用修正。`li/div/ul:has(.../biology/...)` が上位要素にも一致して `ホーム/タグ一覧/カテゴリ一覧` まで消えていたため、サイズ0化対象を `li:has(a[href^='/ja/biology/'])`（英語側同等）に限定。主要3リンクの表示を維持したまま不要ブロックのみ除去。`npm run build` 成功を確認。
+- 2026-02-15: 追加修正。`li:has(.../biology/...)` でも親 `li` 巻き込みが残り得るため、該当ルール自体を削除して主要3リンク（`ホーム/タグ一覧/カテゴリ一覧`）の表示を優先。不要ノード除去は「許可リンク以外を隠す」既存ルールに一本化。`npm run build` 成功を確認。
+- 2026-02-15: 要望により「3リンク以外はサイズ0」を厳密化。`styles/locale-sidebar.css` に、許可リンクを含まない `li/div/ul` を対象とした `display:none` + `height/min-height/margin/padding:0` + `overflow:hidden` を追加し、非対象要素の占有をゼロ化。`npm run build` 成功を確認。
