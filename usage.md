@@ -1,6 +1,6 @@
 ---
 created: '2026-02-13T04:15:03+09:00'
-updated: '2026-02-16T01:40:34+09:00'
+updated: '2026-02-16T01:43:29+09:00'
 author: saku
 ---
 # Usage: コンテンツ編集手順
@@ -130,3 +130,4 @@ npx next export
 - 全体スタイルは `pages/_app.mdx` で読み込みます。
 - pre-commit フックで `created`/`updated`/`author` を自動更新しています。必要に応じて `npm run fm:update` でも更新できます。
 - 仕様・運用の変更を行った場合は、`Codex.md` と `usage.md` に変更内容を追記してください。
+- 左サイドバー最上部の言語ラベル（ja/en見出し）は非表示にしています。

@@ -6,6 +6,11 @@
   display: none !important;
 }
 
+[data-current-locale='ja'] aside ul.nextra-menu-desktop > li:has(a[href^='/ja/']) > button,
+[data-current-locale='en'] aside ul.nextra-menu-desktop > li:has(a[href^='/en/']) > button {
+  display: none !important;
+}
+
 @media (min-width: 768px) {
   nav .header-locale-switch {
     order: 1;
