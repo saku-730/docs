@@ -1,0 +1,78 @@
+---
+title: 記事一覧
+description: /ja/biology 配下の記事一覧
+tags:
+  - index
+categories:
+  - navigation
+audience: beginner
+created: 2026-02-15T15:00:00.000Z
+updated: '2026-02-16T03:01:34+09:00'
+author: saku
+---
+
+import fs from 'node:fs'
+import path from 'node:path'
+import matter from 'gray-matter'
+
+export async function getStaticProps() {
+  const baseDir = path.join(process.cwd(), 'pages', 'ja', 'biology')
+  const collator = new Intl.Collator('ja')
+
+  const collectMdxFiles = (dir) => {
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
+    const files = []
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        files.push(...collectMdxFiles(fullPath))
+      } else if (entry.isFile() && entry.name === 'index.mdx') {
+        files.push(fullPath)
+      }
+    }
+    return files
+  }
+
+  const articles = collectMdxFiles(baseDir)
+    .map((filePath) => {
+      const raw = fs.readFileSync(filePath, 'utf8')
+      const { data } = matter(raw)
+      const relativeDir = path
+        .relative(path.join(process.cwd(), 'pages'), path.dirname(filePath))
+        .split(path.sep)
+        .join('/')
+      const href = `/${relativeDir}/`
+      const title =
+        typeof data.title === 'string' ? data.title : path.basename(path.dirname(filePath))
+      return { href, title }
+    })
+    .sort((a, b) => collator.compare(a.title, b.title))
+
+  return {
+    props: {
+      articles
+    }
+  }
+}
+
+export default function Page({ articles }) {
+  return (
+    <>
+      <h1>記事一覧</h1>
+      <p>
+        <code>/ja/biology</code> 配下の記事を frontmatter の <code>title</code> をもとに五十音順で表示しています。
+      </p>
+      {articles.length === 0 ? (
+        <p>記事はまだありません。</p>
+      ) : (
+        <ul>
+          {articles.map((article) => (
+            <li key={article.href}>
+              <a href={article.href}>{article.title}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  )
+}

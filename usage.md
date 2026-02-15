@@ -1,6 +1,6 @@
 ---
 created: '2026-02-13T04:15:03+09:00'
-updated: '2026-02-16T02:23:19+09:00'
+updated: '2026-02-16T03:01:34+09:00'
 author: saku
 ---
 # Usage: コンテンツ編集手順
@@ -96,6 +96,11 @@ export default {
 - カテゴリ詳細: `pages/ja/categories/*/index.mdx`, `pages/en/categories/*/index.mdx`
 
 新規ページを作成したら、関連するタグ/カテゴリページにリンクを追加してください。
+
+## 3.5. 記事一覧ページ（/ja/articles）
+
+- `/ja/articles` は `pages/ja/biology/**/index.mdx` を対象に、frontmatter の `title` を使って記事リンクを五十音順で表示します。
+- 実装は `pages/ja/articles/index.mdx` の `getStaticProps` で行っています（Nextraテーマ適用のため MDX ページとして実装）。
 
 ## 4. ローカルでのプレビュー
 

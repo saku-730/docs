@@ -5,7 +5,7 @@ tags:
   - Nextjs
 draft: false
 created: 2025-10-06T00:00:00.000Z
-updated: '2026-02-16T02:23:19+09:00'
+updated: '2026-02-16T03:01:34+09:00'
 author: saku
 ---
 ###### **目次**
@@ -236,3 +236,5 @@ maxLevel:5
 - 2026-02-15: 副作用修正。`li/div/ul:has(.../biology/...)` が上位要素にも一致して `ホーム/タグ一覧/カテゴリ一覧` まで消えていたため、サイズ0化対象を `li:has(a[href^='/ja/biology/'])`（英語側同等）に限定。主要3リンクの表示を維持したまま不要ブロックのみ除去。`npm run build` 成功を確認。
 - 2026-02-15: 追加修正。`li:has(.../biology/...)` でも親 `li` 巻き込みが残り得るため、該当ルール自体を削除して主要3リンク（`ホーム/タグ一覧/カテゴリ一覧`）の表示を優先。不要ノード除去は「許可リンク以外を隠す」既存ルールに一本化。`npm run build` 成功を確認。
 - 2026-02-15: 要望により「3リンク以外はサイズ0」を厳密化。`styles/locale-sidebar.css` に、許可リンクを含まない `li/div/ul` を対象とした `display:none` + `height/min-height/margin/padding:0` + `overflow:hidden` を追加し、非対象要素の占有をゼロ化。`npm run build` 成功を確認。
+- 2026-02-16: `pages/ja/articles/index.tsx` を追加し、`/ja/biology/**/index.mdx` を走査して frontmatter の `title` で五十音順ソートした記事一覧ページ（`/ja/articles`）を実装。`pages/ja/_meta.js` に `articles: '記事一覧'` を追加。`npm run build` 成功を確認。
+- 2026-02-16: `/ja/articles` に Nextra テーマ/CSS が適用されない問題を修正。`pages/ja/articles/index.tsx` を `pages/ja/articles/index.mdx` へ置き換え、`getStaticProps` と一覧ロジックを維持したまま MDX ページ化。`npm run build` 成功を確認。
